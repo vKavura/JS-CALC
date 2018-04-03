@@ -63,22 +63,19 @@ window.onload = function() {
 
   mult.onclick = function() {
   	oper(function(ar1,ar2) {
-  		var result = (+ar1) * (+ar2); 
-  		return +result.toFixed(10);
+  		return (+ar1) * (+ar2); 
   	})
   }
 
   addi.onclick = function() {
   	oper(function(ar1,ar2) {
-  		var result = (+ar1) + (+ar2); 
-  		return +result.toFixed(10);
+  		return (+ar1) + (+ar2); 
   	})
   }
 
   substr.onclick = function() {
   	oper(function(ar1,ar2) {
-  		var result = (+ar1) - (+ar2); 
-  		return +result.toFixed(10);
+  		return (+ar1) - (+ar2); 
   	})
   }
 
@@ -87,27 +84,28 @@ window.onload = function() {
   		if (ar2 == '0') {
   			return 'ERROR';
   		}	
-  		var result = (+ar1) / (+ar2); 
-  		return +result.toFixed(10);
+  	return (+ar1) / (+ar2); 
   	})		
   } 
 
 function oper(func) {
-    f = func;
-    if (action == 0) {
-		  a = scr.innerText;
-		  scr.innerText = 0;
-		  action = 1;
-    } else {
-		  scr.innerText = f(a, scr.innerText);
-		  a = scr.innerText;
-		  b = 1;
-    }
+  f = func;
+  if (action == 0) {
+	  a = scr.innerText;
+	  scr.innerText = 0;
+	  action = 1;
+  } else {
+    var result = f(a, scr.innerText);
+	  scr.innerText = (result != 'ERROR') ? +result.toFixed(6) : result;
+	  a = scr.innerText;
+	  b = 1;
   }
+}
 
   eqv.onclick = function() {
   	if (action != 0) {
-  		scr.innerText = f(a, scr.innerText);
+  		var result = f(a, scr.innerText);
+      scr.innerText = (result != 'ERROR') ? +result.toFixed(6) : result;
       action = 0;
   	}
   }
