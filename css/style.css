@@ -1,5 +1,5 @@
 
-div{
+div {
     
     text-align: center;
     padding: 5px;
@@ -13,20 +13,23 @@ div{
     display: flex;
     flex-wrap:wrap;
     justify-content: space-around;
+    background-color: #313030;
 }
 
 #scrin {
     height: 25px;
     width: 125px;
     outline: 1px solid #cccccc;
+    background-color: #fff;
     
 }
 
-#panel{
+#panel {
     display: flex;
     flex-wrap:wrap;
     outline: 1px solid #cccccc;
     justify-content: space-around;
+    background-color: #828282;
 }
 
 #panel div {
@@ -35,4 +38,6 @@ div{
     margin: 2px;
     outline: 1px solid #cccccc;
     cursor: pointer;
+    background-color: #313030;
+    color: #fff;
 }
