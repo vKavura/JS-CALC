@@ -2,19 +2,22 @@
 <html lang="ru">
 	<head>
 		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
 		<title>Калькулятор</title>
 		<link rel="stylesheet" href="css/style.css" />
+		<link rel="shortcut icon" href="favicon.ico">
 	</head>
 	<body>
 	<div class="corpus">
-		<div id="scrin">
+		<div id="scrin-wrap">
+			<div id="scrin"></div>
 			<div id="hist"></div>
 		</div>
 		<div id="panel">
-			<div id="plus">+</div>
-			<div id="minus">-</div>
-			<div id="dele">/</div>
-			<div id="umno">*</div>
+			<div id="add">+</div>
+			<div id="subtract">-</div>
+			<div id="division">/</div>
+			<div id="multipl">*</div>
 			<div class="digit" id="d1">1</div>
 			<div class="digit" id="d2">2</div>
 			<div class="digit" id="d3">3</div>
@@ -32,9 +35,9 @@
 			
 		</div>
 		
+		<div id="manga"><a href="/manga/">CALC</a></div>
+	</div>
 	
-	<div>
-	
-	<script src="./js/calc.js"> </script>
+	<script src="js/calc.js"> </script>
 	</body>
 </html>

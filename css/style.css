@@ -6,7 +6,7 @@ div {
 }
 
 .corpus {
-    height: 260px;
+    height: 270px;
     width: 170px;
     margin: 0 auto;
     outline: 1px solid #cccccc;
@@ -14,6 +14,11 @@ div {
     flex-wrap:wrap;
     justify-content: space-around;
     background-color: #313030;
+    box-shadow: 5px 5px 9px rgba(0,0,0,.3);
+}
+
+#scrin-wrap {
+    position: relative;
 }
 
 #scrin {
@@ -21,7 +26,16 @@ div {
     width: 125px;
     outline: 1px solid #cccccc;
     background-color: #fff;
-    
+    vertical-align:bottom;
+    text-align: right;
+    line-height: 40px;
+}
+
+#hist {
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: 8px;
 }
 
 #panel {
@@ -33,11 +47,23 @@ div {
 }
 
 #panel div {
-    height: 25px;
-    width: 25px;
+    height: 23px;
+    width: 23px;
     margin: 2px;
-    outline: 1px solid #cccccc;
+    /*outline: 1px solid #cccccc;*/
     cursor: pointer;
     background-color: #313030;
+    line-height: 25px;
     color: #fff;
+    border-radius: 7px;
+    border: 1px solid #cccccc;
+    box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.74);
+}
+
+#manga a{
+    margin: 0 auto;
+    font-size: 8px;
+    color : black;
+    text-decoration: none;
+    cursor: default;
 }
