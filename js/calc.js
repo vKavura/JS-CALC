@@ -1,112 +1,102 @@
+"use strict"
+
 window.onload = function() {
-  
-  var action = 0;
-  var a = 0;
-  var b = 0;
-  var f;
-  var btn = document.querySelectorAll('.digit');
-  var scr = document.querySelector('#scrin');
-  var coma = document.querySelector('#dec');
-  var addi = document.querySelector('#add');
-  var substr = document.querySelector('#subtract');
-  var divis = document.querySelector('#division');
-  var mult = document.querySelector('#multipl');
-  var erase = document.querySelector('#eras');
-  var corect = document.querySelector('#correct');
-  var eqv = document.querySelector('#eqv');
-  var hist = document.querySelector('#hist');
 
-  scr.innerText = 0;
- 
-  for (var i = 0; i < btn.length; i++) {
-    btn[i].addEventListener('click', function() {
+  let panel = document.querySelector('#panel');
+  let scr = document.querySelector('#scrin');
+  let hist = document.querySelector('#hist');
+  let b = 0;
+  let action = 0;
+  let a = 0;
+  let f;
+
+  panel.addEventListener('click', function(event) {
+
+    if (event.target.className == 'bttns') {
+      switch(event.target.innerText) {
+        case '+':
+          oper(function(ar1,ar2) {
+            return (+ar1) + (+ar2); 
+          })
+        break;
+        case '-':
+          oper(function(ar1,ar2) {
+            return (+ar1) - (+ar2); 
+          })
+        break;
+        case '*':
+          oper(function(ar1,ar2) {
+            return (+ar1) * (+ar2); 
+          })
+        break;
+        case '/':
+          oper(function(ar1,ar2) {
+            if (ar2 == '0') {
+              return 'ERROR';
+            } 
+            return (+ar1) / (+ar2); 
+          })    
+        break;
+        case ',':
+          if (b ==1) {
+            scr.innerText = 0;
+            b = 0;
+          }
+          if (scr.innerText.length < 10) {
+              if (scr.innerText.indexOf(".") == -1) {
+                scr.innerText += '.';
+              }
+            }
+        break;
+        case '<-':
+          if (scr.innerText.length > 1) {
+            scr.innerText = scr.innerText.substring(0, scr.innerText.length - 1); 
+          } else {
+            scr.innerText = 0;
+          }
+        break;
+        case 'C':
+          scr.innerText = 0;
+          action = 0;
+          b = 0;
+          a = 0;
+        break;
+        case '=':
+          if (action != 0) {
+            var result = f(a, scr.innerText);
+            scr.innerText = (result != 'ERROR') ? +result.toFixed(6) : result;
+            action = 0;
+          }
+        break;
+      }
+    } 
+
+    if (event.target.className == 'digit') {
       if (b == 1) {
-        scr.innerText = 0;
-        b = 0;
-      }
-      if (scr.innerText.length < 10) {
-        if (scr.innerText != '0') {
-          scr.innerText += this.innerText;
-        } else {
-          scr.innerText = this.innerText;
+          scr.innerText = 0;
+          b = 0;
         }
-      } 
-    });       
-  }   
+        if (scr.innerText.length < 10) {
+          if (scr.innerText != '0') {
+            scr.innerText += event.target.innerText;
+          } else {
+            scr.innerText = event.target.innerText;
+          }
+        } 
+    } 
 
-  corect.onclick = function() {
-    if (scr.innerText.length > 1) {
-      scr.innerText = scr.innerText.substring(0, scr.innerText.length - 1); 
-    } else {
-      scr.innerText = 0;
-    }
-  }  
-
-  erase.onclick = function() {
-    scr.innerText = 0;
-    action = 0;
-    b = 0;
-    a = 0;
-  } 
-
-  coma.onclick = function() {
-    if (b ==1) {
-	  scr.innerText = 0;
-	  b = 0;
-	}
-	if (scr.innerText.length < 10) {
-      if (scr.innerText.indexOf(".") == -1) {
-        scr.innerText += '.';
+    function oper(func) {
+      f = func;
+      if (action == 0) {
+        a = scr.innerText;
+        scr.innerText = 0;
+        action = 1;
+      } else {
+        var result = f(a, scr.innerText);
+        scr.innerText = (result != 'ERROR') ? +result.toFixed(6) : result;
+        a = scr.innerText;
+        b = 1;
       }
     }
-  } 
-
-  mult.onclick = function() {
-  	oper(function(ar1,ar2) {
-  		return (+ar1) * (+ar2); 
-  	})
-  }
-
-  addi.onclick = function() {
-  	oper(function(ar1,ar2) {
-  		return (+ar1) + (+ar2); 
-  	})
-  }
-
-  substr.onclick = function() {
-  	oper(function(ar1,ar2) {
-  		return (+ar1) - (+ar2); 
-  	})
-  }
-
-  divis.onclick = function() {
-  	oper(function(ar1,ar2) {
-  		if (ar2 == '0') {
-  			return 'ERROR';
-  		}	
-  	return (+ar1) / (+ar2); 
-  	})		
-  } 
-
-function oper(func) {
-  f = func;
-  if (action == 0) {
-	  a = scr.innerText;
-	  scr.innerText = 0;
-	  action = 1;
-  } else {
-    var result = f(a, scr.innerText);
-	  scr.innerText = (result != 'ERROR') ? +result.toFixed(6) : result;
-	  a = scr.innerText;
-	  b = 1;
-  }
-}
-
-  eqv.onclick = function() {
-  	if (action != 0) {
-  		var result = f(a, scr.innerText);
-      scr.innerText = (result != 'ERROR') ? +result.toFixed(6) : result;
-      action = 0;
-  	}
-  }
+  }, true);
 }
